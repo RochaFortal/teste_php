@@ -8,7 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-use AppBundle\Repository\CustomerRepository;
+//use AppBundle\Repository\CustomerRepository;
+use AppBundle\Service\CustomerService;
 use AppBundle\Entity\Customer;
 use AppBundle\Form\CustomerType;
 
@@ -18,13 +19,13 @@ use AppBundle\Form\CustomerType;
 class CustomerController extends Controller
 {
     /**
-     * @var CustomerRespository
+     * @var CustomerService
      */
-    private $customerRepository;
+    private $customerService;
     
-    public function __construct(CustomerRepository $customerRespository) 
+    public function __construct(CustomerService $customerService) 
     {
-        $this->customerRepository = $customerRespository;
+        $this->customerService = $customerService;
     }
     
     /**
@@ -32,7 +33,7 @@ class CustomerController extends Controller
      */
     function indexAction(Request $request) 
     {
-        $customers = $this->customerRepository->findAll();
+        $customers = $this->customerService->findAll();
         $customers = $this->get('jms_serializer')->serialize($customers, 'json');
         return new Response($customers);
     }
@@ -62,7 +63,7 @@ class CustomerController extends Controller
                     : NULL;
         
         $customer->setDataNascimento($dtNascimento);
-        $this->customerRepository->save($form->getData());
+        $this->customerService->save($form->getData());
         return new Response('OK');
     }
     
@@ -76,7 +77,7 @@ class CustomerController extends Controller
         $form = $this->createForm(CustomerType::class, $customer);
         $form->submit($data);
         
-        $this->customerRepository->save($customer);
+        $this->customerService->save($customer);
         
         return new Response('OK');
     }
@@ -87,7 +88,7 @@ class CustomerController extends Controller
      */
     function deleteAction(Customer $customer)
     {
-        $this->customerRepository->delete($customer);
+        $this->customerService->delete($customer);
         return new Response('OK');
     }
             

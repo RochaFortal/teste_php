@@ -15,8 +15,10 @@ services:
         public: false
         
     AppBundle\Repository\:
-#        resource: ../Repository
         resource: ../../src/AppBundle/Repository/
+    
+    AppBundle\Service\:
+        resource: ../../src/AppBundle/Service/
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
