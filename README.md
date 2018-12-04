@@ -7,7 +7,6 @@ API Restful usando Symfony
 + [Criando banco de dados](#criando-banco-de-dados)
 + [Criando tabelas e schemas](#criando-tabelas-e-schemas)
 + [Rodando o servidor e iniciando a aplicação](#rodando-o-servidor-e-iniciando-a-aplicação)
-+ [Versionamento](#versionamento)
 + [Desenvolvido por](#desenvolvido-por)
 + [Contato](#contato)
  
